@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Update Server</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript">
+		 jQuery(function($){
+		 	var updateServer=$('#updateServer6010');
+		 	var errorDiv=$('#errorDiv');
+
+		 	updateServer.submit((event)=>{
+		 		event.preventDefault();
+				var params={'port':'6010'}
+						 $.ajax({
+				                dataType: "json",
+				                type: "POST",
+				                data: params,
+				                async: false,
+				                url: "/update",
+				                success: function (result) {
+				                    console.log("res >> >> "+JSON.stringify(result));
+				                    errorDiv.html(JSON.stringify(result))
+				                },
+				                error: function (err) {
+				                   // alert("err >> >> "+JSON.stringify(err.stack));
+				                    console.log("err >> >> "+JSON.stringify(err.stack));
+				                	errorDiv.html(JSON.stringify(err.stack))
+				                }
+				            });
+		 	})
+		 })
+		 
+	</script>
+</head>
+<body>
+	<form id='updateServer6010'>
+		<div><div>localhost://6010</div>
+		<input type="submit"></input></div>
+	</form>
+	<div id='errorDiv'>sfsfsdfsdfsdf</div>
+</body>
+</html>
